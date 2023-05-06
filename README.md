@@ -33,12 +33,12 @@ Projenin kurulumundan sonra, aşağıdaki adımları izleyerek senaryoları çal
 Testiniz fail olursa terminalden hata mesajını görüntüleyebilir ve ***src/test/screenShots*** dosyasında hata ekran görüntüsünü görebilirsiniz.
 
 
-# Katkıda Bulunma
+## Katkıda Bulunma
 Herhangi bir hata veya öneriniz varsa, lütfen Github üzerinden issue açın veya pull request gönderin.
 
 Teşekkürler!
 
-# Lisans
+## Lisans
 Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENSE dosyasına bakınız.
 
 # Sürüm Bilgileri
