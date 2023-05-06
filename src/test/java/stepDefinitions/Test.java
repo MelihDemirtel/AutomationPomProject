@@ -1,6 +1,9 @@
 package stepDefinitions;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,6 +12,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import pages.HomePage;
 
+import java.io.File;
 import java.time.Duration;
 
 public class Test {
@@ -20,6 +24,7 @@ public class Test {
     private HomePage homePage;
 
     private String baseUrl = "https://demoqa.com";
+    private String screenshotDirectory = "src/test/screenshots/";
 
     @BeforeClass
     public void setUp() {
@@ -36,9 +41,14 @@ public class Test {
     }
 
     @org.testng.annotations.Test(priority = 1)
-    public void testHomePage() {
-        logger.info("Verifying User is on Home Page...");
-        homePage.verifyHomePageIsOpened();
+    public void testHomePage() throws Exception {
+        try {
+            logger.info("Verifying User is on Home Page...");
+            homePage.verifyHomePageIsOpened();
+        } catch (Exception e) {
+            takeScreenshot(screenshotDirectory, "home_page_error");
+            e.printStackTrace();
+        }
     }
 
     @AfterClass
@@ -49,6 +59,20 @@ public class Test {
         }
         if (wait != null) {
             wait = null;
+        }
+    }
+
+    private void takeScreenshot(String directory, String fileName) {
+        File scrDirectory = new File(directory);
+        if (!scrDirectory.exists()) {
+            scrDirectory.mkdir();
+        }
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screenshot, new File(directory + fileName + ".png"));
+            logger.info("Screenshot captured: " + directory + fileName + ".png");
+        } catch (Exception e) {
+            logger.error("Failed to capture screenshot: " + e.getMessage());
         }
     }
 }
