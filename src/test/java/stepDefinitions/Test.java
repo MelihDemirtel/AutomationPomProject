@@ -26,11 +26,12 @@ public class Test {
     private WebDriverWait wait;
     private ChromeOptions options;
     private Date currentDate;
+    private File file;
     private HomePage homePage;
     private ElementsPage elementsPage;
 
-    private String baseUrl = "https://demoqa.com";
-    private String screenShotFilePath = "D:\\AutomationPomProject\\src\\test\\screenShots\\";
+    private final String baseUrl = "https://demoqa.com";
+    private final String screenShotFilePath = "D:\\AutomationPomProject\\src\\test\\screenShots\\";
 
     @BeforeClass
     public void setUp() {
@@ -39,6 +40,7 @@ public class Test {
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         currentDate = new Date();
+        file = new File("D:\\AutomationPomProject\\src\\test\\");
         homePage = new HomePage(driver);
         elementsPage = new ElementsPage(driver);
 
@@ -88,8 +90,12 @@ public class Test {
     }
 
     public void takeScreenShot() throws IOException {
-        String screenShotFileName = currentDate.toString().replace(" ", "-").replace(":", "-");
-        File screenShotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenShotFile, new File(screenShotFilePath + screenShotFileName + ".png"));
+        if (!file.exists()){
+            file.mkdir();
+        } else {
+            String screenShotFileName = currentDate.toString().replace(" ", "-").replace(":", "-");
+            File screenShotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenShotFile, new File(screenShotFilePath + screenShotFileName + ".png"));
+        }
     }
 }
