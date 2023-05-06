@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -10,21 +11,26 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import pages.ElementsPage;
 import pages.HomePage;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Date;
 
 public class Test {
-    private static final Logger logger = Logger.getLogger(Test.class);
+    private static final Logger logger = LogManager.getLogger(Test.class);
 
     private WebDriver driver;
     private WebDriverWait wait;
     private ChromeOptions options;
+    private Date currentDate;
     private HomePage homePage;
+    private ElementsPage elementsPage;
 
     private String baseUrl = "https://demoqa.com";
-    private String screenshotDirectory = "src/test/screenshots/";
+    private String screenShotFilePath = "D:\\AutomationPomProject\\src\\test\\screenShots\\";
 
     @BeforeClass
     public void setUp() {
@@ -32,7 +38,9 @@ public class Test {
         options.addArguments("--enable-features=Cookies");
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        currentDate = new Date();
         homePage = new HomePage(driver);
+        elementsPage = new ElementsPage(driver);
 
         logger.info("Driver is getting maximize...");
         driver.manage().window().maximize();
@@ -41,19 +49,36 @@ public class Test {
     }
 
     @org.testng.annotations.Test(priority = 1)
-    public void testHomePage() throws Exception {
+    public void testHomePage() throws IOException {
         try {
             logger.info("Verifying User is on Home Page...");
             homePage.verifyHomePageIsOpened();
-        } catch (Exception e) {
-            takeScreenshot(screenshotDirectory, "home_page_error");
-            e.printStackTrace();
+            logger.info("Going To Elements Page...");
+            homePage.goToElementsPage();
+        } catch (AssertionError e) {
+            logger.error("An exception occurred while running testHomePage: " + e.getMessage());
+            takeScreenShot();
+            throw e;
         }
+
+    }
+
+    @org.testng.annotations.Test(priority = 2)
+    public void testElementsPage() throws IOException {
+        try {
+            logger.info("Verifying User is on Elements Page...");
+            elementsPage.verifyElementsPageIsOpened();
+        } catch (AssertionError e) {
+            logger.error("An exception occurred while running testHomePage: " + e.getMessage());
+            takeScreenShot();
+            throw e;
+        }
+
     }
 
     @AfterClass
     public void tearDown() {
-        logger.info("Tests are Ending...");
+        logger.info("Tests are ending...");
         if (driver != null) {
             driver.quit();
         }
@@ -62,17 +87,9 @@ public class Test {
         }
     }
 
-    private void takeScreenshot(String directory, String fileName) {
-        File scrDirectory = new File(directory);
-        if (!scrDirectory.exists()) {
-            scrDirectory.mkdir();
-        }
-        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(screenshot, new File(directory + fileName + ".png"));
-            logger.info("Screenshot captured: " + directory + fileName + ".png");
-        } catch (Exception e) {
-            logger.error("Failed to capture screenshot: " + e.getMessage());
-        }
+    public void takeScreenShot() throws IOException {
+        String screenShotFileName = currentDate.toString().replace(" ", "-").replace(":", "-");
+        File screenShotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenShotFile, new File(screenShotFilePath + screenShotFileName + ".png"));
     }
 }
