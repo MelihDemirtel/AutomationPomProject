@@ -22,7 +22,8 @@ public class Test {
     private String baseUrl = "https://demoqa.com";
 
     @BeforeClass
-    public void setUp(){
+    public void setUp() {
+        options = new ChromeOptions();
         options.addArguments("--enable-features=Cookies");
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -33,11 +34,13 @@ public class Test {
         logger.info("Opening  " + baseUrl + "  Website...");
         driver.get(baseUrl);
     }
+
     @org.testng.annotations.Test(priority = 1)
     public void testHomePage() {
         logger.info("Verifying User is on Home Page...");
         homePage.verifyHomePageIsOpened();
     }
+
     @AfterClass
     public void tearDown() {
         logger.info("Tests are Ending...");
@@ -47,4 +50,5 @@ public class Test {
         if (wait != null) {
             wait = null;
         }
+    }
 }

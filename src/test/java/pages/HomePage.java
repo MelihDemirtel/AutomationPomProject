@@ -23,7 +23,7 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
     public void verifyHomePageIsOpened() {
-        String expectedUrl = "https://demoqa.com";
+        String expectedUrl = "https://demoqa.com/";
         Assert.assertEquals(driver.getCurrentUrl(), expectedUrl);
     }
 }
