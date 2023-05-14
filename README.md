@@ -52,3 +52,6 @@ Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENS
 - Hata düzeltmeleri yapıldı.
 
 - README.md dosyası güncellendi.
+
+## Sürüm 1.2
+- pages paketinin altına "Text Box Page", "Forms Page" eklendi.
