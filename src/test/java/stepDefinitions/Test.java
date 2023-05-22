@@ -48,7 +48,6 @@ public class Test {
         elementsPage = new ElementsPage(driver);
         textBoxPage = new TextBoxPage(driver);
 
-
         logger.info("Driver is getting maximize...");
         driver.manage().window().maximize();
     }

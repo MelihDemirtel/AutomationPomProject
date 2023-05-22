@@ -55,3 +55,10 @@ Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENS
 
 ## Sürüm 1.2
 - pages paketinin altına "Text Box Page", "Forms Page" eklendi.
+
+## Sürüm 1.3
+- pages paketinin altına "AlertsFrameWindows Page", "Interactions Page, Widgets Page" eklendi.
+- HomePage sayfası elementleri tanımlandı ve test fonksiyonları yazıldı.
+- TextBoxPage sayfası elementleri tanımlandı ve test fonksiyonları yazıldı.
+- Test sınıfının içine @BeforeMethod anatasyonu eklendi.
+- Test sınıfının içine TextBoxPage senaryoları eklendi.
