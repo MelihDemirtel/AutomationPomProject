@@ -45,10 +45,10 @@ public class TextBoxPage {
     @FindBy(id = "email")
     private WebElement resultEmail;
 
-    @FindBy(id = "currentAddress")
+    @FindBy(xpath = "//p[@id='currentAddress']")
     private WebElement resultCurrentAddress;
 
-    @FindBy(id = "permanentAddress")
+    @FindBy(xpath = "//p[@id='permanentAddress']")
     private WebElement resultPermanentAddress;
 
     public TextBoxPage(WebDriver driver) {
@@ -91,7 +91,7 @@ public class TextBoxPage {
         wait.until(ExpectedConditions.visibilityOf(informationArea));
         Assert.assertEquals(resultName.getText(), "Name:" + fullName);
         Assert.assertEquals(resultEmail.getText(), "Email:" + email);
-        Assert.assertEquals(resultCurrentAddress, "Current Address :" + currentAddress);
-        Assert.assertEquals(resultPermanentAddress, "Permananet Address :" + permanentAddress);
+        Assert.assertEquals(resultCurrentAddress.getText(), "Current Address :" + currentAddress);
+        Assert.assertEquals(resultPermanentAddress.getText(), "Permananet Address :" + permanentAddress);
     }
 }
