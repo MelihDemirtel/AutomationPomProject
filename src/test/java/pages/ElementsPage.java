@@ -20,6 +20,9 @@ public class ElementsPage {
     @FindBy(xpath = "//span[text()='Text Box']")
     private WebElement textBoxPageBtn;
 
+    @FindBy(xpath = "//span[text()='Check Box']")
+    private WebElement checkBoxPageBtn;
+
     public ElementsPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
