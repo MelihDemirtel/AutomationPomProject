@@ -29,6 +29,9 @@ public class HomePage {
     @FindBy(xpath = "//h5[text()='Widgets']")
     private WebElement widgetsBtn;
 
+    @FindBy(xpath = "//h5[text()='Interactions']")
+    private WebElement interactionsBtn;
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -60,5 +63,10 @@ public class HomePage {
     public WidgetsPage goToWidgetsPage() {
         widgetsBtn.click();
         return new WidgetsPage(driver);
+    }
+
+    public InteractionsPage goToInteractionsPage() {
+        interactionsBtn.click();
+        return new InteractionsPage(driver);
     }
 }
