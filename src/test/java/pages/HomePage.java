@@ -26,6 +26,9 @@ public class HomePage {
     @FindBy(xpath = "//h5[text()='Alerts, Frame & Windows']")
     private WebElement alertsFrameWindowsBtn;
 
+    @FindBy(xpath = "//h5[text()='Widgets']")
+    private WebElement widgetsBtn;
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -52,5 +55,10 @@ public class HomePage {
     public AlertsFrameWindowsPage goToAlertsFrameWindowsPage() {
         alertsFrameWindowsBtn.click();
         return new AlertsFrameWindowsPage(driver);
+    }
+
+    public WidgetsPage goToWidgetsPage() {
+        widgetsBtn.click();
+        return new WidgetsPage(driver);
     }
 }
