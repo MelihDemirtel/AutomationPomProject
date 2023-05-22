@@ -23,6 +23,9 @@ public class HomePage {
     @FindBy(xpath = "//h5[text()='Forms']")
     private WebElement formsPageBtn;
 
+    @FindBy(xpath = "//h5[text()='Alerts, Frame & Windows']")
+    private WebElement alertsFrameWindowsBtn;
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -44,5 +47,10 @@ public class HomePage {
     public FormsPage goToFormsPage() {
         formsPageBtn.click();
         return new FormsPage(driver);
+    }
+
+    public AlertsFrameWindowsPage goToAlertsFrameWindowsPage() {
+        alertsFrameWindowsBtn.click();
+        return new AlertsFrameWindowsPage(driver);
     }
 }
