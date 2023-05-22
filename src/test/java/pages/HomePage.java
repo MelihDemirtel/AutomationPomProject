@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -43,6 +44,7 @@ public class HomePage {
     public void verifyHomePageIsOpened() {
         String expectedUrl = "https://demoqa.com/";
         Assert.assertEquals(driver.getCurrentUrl(), expectedUrl);
+        jsx.executeScript("window.scrollBy(0,300)");
     }
 
     public ElementsPage goToElementsPage() {
@@ -68,5 +70,14 @@ public class HomePage {
     public InteractionsPage goToInteractionsPage() {
         interactionsBtn.click();
         return new InteractionsPage(driver);
+    }
+
+    public void checkPagesButtons() {
+        wait.until(ExpectedConditions.visibilityOf(elementsPageBtn));
+        Assert.assertTrue(elementsPageBtn.isDisplayed());
+        Assert.assertTrue(formsPageBtn.isDisplayed());
+        Assert.assertTrue(alertsFrameWindowsBtn.isDisplayed());
+        Assert.assertTrue(widgetsBtn.isDisplayed());
+        Assert.assertTrue(interactionsBtn.isDisplayed());
     }
 }

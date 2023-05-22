@@ -11,8 +11,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import pages.ElementsPage;
 import pages.HomePage;
+import pages.TextBoxPage;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +31,7 @@ public class Test {
     private File file;
     private HomePage homePage;
     private ElementsPage elementsPage;
+    private TextBoxPage textBoxPage;
 
     private final String baseUrl = "https://demoqa.com";
     private final String screenShotFilePath = "D:\\AutomationPomProject\\src\\test\\screenShots\\";
@@ -43,9 +46,15 @@ public class Test {
         file = new File("D:\\AutomationPomProject\\src\\test\\");
         homePage = new HomePage(driver);
         elementsPage = new ElementsPage(driver);
+        textBoxPage = new TextBoxPage(driver);
+
 
         logger.info("Driver is getting maximize...");
         driver.manage().window().maximize();
+    }
+
+    @BeforeMethod
+    public void beforeAllTests() {
         logger.info("Opening  " + baseUrl + "  Website...");
         driver.get(baseUrl);
     }
@@ -55,8 +64,8 @@ public class Test {
         try {
             logger.info("Verifying User is on Home Page...");
             homePage.verifyHomePageIsOpened();
-            logger.info("Going To Elements Page...");
-            homePage.goToElementsPage();
+            logger.info("Checking All Buttons of Pages...");
+            homePage.checkPagesButtons();
         } catch (AssertionError e) {
             logger.error("An exception occurred while running testHomePage: " + e.getMessage());
             takeScreenShot();
@@ -68,8 +77,40 @@ public class Test {
     @org.testng.annotations.Test(priority = 2)
     public void testElementsPage() throws IOException {
         try {
+            logger.info("Going to Elements Page...");
+            homePage.goToElementsPage();
             logger.info("Verifying User is on Elements Page...");
             elementsPage.verifyElementsPageIsOpened();
+        } catch (AssertionError e) {
+            logger.error("An exception occurred while running testHomePage: " + e.getMessage());
+            takeScreenShot();
+            throw e;
+        }
+
+    }
+
+    @org.testng.annotations.Test(priority = 3)
+    public void testTextBoxPage() throws IOException {
+        try {
+            logger.info("Going to Elements Page...");
+            homePage.goToElementsPage();
+            logger.info("Going to TextBox Page...");
+            elementsPage.goToTextBoxPage();
+            logger.info("Verifying User is on TextBox Page...");
+            textBoxPage.verifyTextBoxPageIsOpened();
+            logger.info("Sending User Full Name");
+            textBoxPage.sendFullName();
+            logger.info("Sending User Email");
+            textBoxPage.sendEmail();
+            logger.info("Sending User Current Address");
+            textBoxPage.sendCurrentAddress();
+            logger.info("Sending User Permanent Address");
+            textBoxPage.sendPermanentAddress();
+            logger.info("Clicking Submit Button");
+            textBoxPage.clickSubmitButton();
+            logger.info("Checking User Information");
+            textBoxPage.checkSubmitResult();
+
         } catch (AssertionError e) {
             logger.error("An exception occurred while running testHomePage: " + e.getMessage());
             takeScreenShot();
@@ -90,7 +131,7 @@ public class Test {
     }
 
     public void takeScreenShot() throws IOException {
-        if (!file.exists()){
+        if (!file.exists()) {
             file.mkdir();
         } else {
             String screenShotFileName = currentDate.toString().replace(" ", "-").replace(":", "-");
