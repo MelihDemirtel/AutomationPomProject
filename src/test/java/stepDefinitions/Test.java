@@ -57,13 +57,13 @@ public class Test {
     public void beforeAllTests() {
         logger.info("Opening  " + baseUrl + "  Website...");
         driver.get(baseUrl);
+        logger.info("Verifying User is on Home Page...");
+        homePage.verifyHomePageIsOpened();
     }
 
     @org.testng.annotations.Test(priority = 1)
     public void testHomePage() throws IOException {
         try {
-            logger.info("Verifying User is on Home Page...");
-            homePage.verifyHomePageIsOpened();
             logger.info("Checking All Buttons of Pages...");
             homePage.checkPagesButtons();
         } catch (AssertionError e) {

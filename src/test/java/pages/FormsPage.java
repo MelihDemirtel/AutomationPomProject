@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 public class FormsPage {
@@ -8,6 +9,7 @@ public class FormsPage {
 
     public FormsPage(WebDriver driver){
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
     public void verifyFormsPageIsOpened() {
         String expectedUrl = "https://demoqa.com/forms";
