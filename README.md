@@ -62,3 +62,8 @@ Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENS
 - TextBoxPage sayfası elementleri tanımlandı ve test fonksiyonları yazıldı.
 - Test sınıfının içine @BeforeMethod anatasyonu eklendi.
 - Test sınıfının içine TextBoxPage senaryoları eklendi.
+
+## Sürüm 1.4
+- Tüm sayfalara logger eklendi. Test şablonundaki loglar page'lere taşındı ve görsel karışıklık düzeltildi.
+- pages paketinin altına "ChekBoxPage" eklendi.
+- testCheckBoxPage adımları eklendi.
