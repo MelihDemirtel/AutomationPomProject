@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pages.CheckBoxPage;
 import pages.ElementsPage;
 import pages.HomePage;
 import pages.TextBoxPage;
@@ -32,6 +33,7 @@ public class Test {
     private HomePage homePage;
     private ElementsPage elementsPage;
     private TextBoxPage textBoxPage;
+    private CheckBoxPage checkBoxPage;
 
     private final String baseUrl = "https://demoqa.com";
     private final String screenShotFilePath = "D:\\AutomationPomProject\\src\\test\\screenShots\\";
@@ -47,6 +49,7 @@ public class Test {
         homePage = new HomePage(driver);
         elementsPage = new ElementsPage(driver);
         textBoxPage = new TextBoxPage(driver);
+        checkBoxPage = new CheckBoxPage(driver);
 
         logger.info("Driver is getting maximize...");
         driver.manage().window().maximize();
@@ -56,15 +59,14 @@ public class Test {
     public void beforeAllTests() {
         logger.info("Opening  " + baseUrl + "  Website...");
         driver.get(baseUrl);
-        logger.info("Verifying User is on Home Page...");
         homePage.verifyHomePageIsOpened();
     }
 
     @org.testng.annotations.Test(priority = 1)
     public void testHomePage() throws IOException {
         try {
-            logger.info("Checking All Buttons of Pages...");
             homePage.checkPagesButtons();
+            logger.info("********** TEST END **********");
         } catch (AssertionError e) {
             logger.error("An exception occurred while running testHomePage: " + e.getMessage());
             takeScreenShot();
@@ -76,10 +78,9 @@ public class Test {
     @org.testng.annotations.Test(priority = 2)
     public void testElementsPage() throws IOException {
         try {
-            logger.info("Going to Elements Page...");
             homePage.goToElementsPage();
-            logger.info("Verifying User is on Elements Page...");
             elementsPage.verifyElementsPageIsOpened();
+            logger.info("********** TEST END **********");
         } catch (AssertionError e) {
             logger.error("An exception occurred while running testHomePage: " + e.getMessage());
             takeScreenShot();
@@ -91,24 +92,38 @@ public class Test {
     @org.testng.annotations.Test(priority = 3)
     public void testTextBoxPage() throws IOException {
         try {
-            logger.info("Going to Elements Page...");
             homePage.goToElementsPage();
-            logger.info("Going to TextBox Page...");
             elementsPage.goToTextBoxPage();
-            logger.info("Verifying User is on TextBox Page...");
             textBoxPage.verifyTextBoxPageIsOpened();
-            logger.info("Sending User Full Name");
             textBoxPage.sendFullName();
-            logger.info("Sending User Email");
             textBoxPage.sendEmail();
-            logger.info("Sending User Current Address");
             textBoxPage.sendCurrentAddress();
-            logger.info("Sending User Permanent Address");
             textBoxPage.sendPermanentAddress();
-            logger.info("Clicking Submit Button");
             textBoxPage.clickSubmitButton();
-            logger.info("Checking User Information");
             textBoxPage.checkSubmitResult();
+            logger.info("********** TEST END **********");
+
+        } catch (AssertionError e) {
+            logger.error("An exception occurred while running testHomePage: " + e.getMessage());
+            takeScreenShot();
+            throw e;
+        }
+
+    }
+
+    @org.testng.annotations.Test(priority = 4)
+    public void testCheckBoxPage() throws IOException {
+        try {
+            homePage.goToElementsPage();
+            elementsPage.goToCheckBoxPage();
+            checkBoxPage.verifyCheckBoxPageIsOpened();
+            checkBoxPage.clickHomeCheckBoxBtn();
+            checkBoxPage.HomeCheckBoxResult();
+            checkBoxPage.ClickExpandAllBtn();
+            checkBoxPage.ExpandResult();
+            checkBoxPage.ClickCollapseAllBtn();
+            checkBoxPage.CollapseResult();
+            logger.info("********** TEST END **********");
 
         } catch (AssertionError e) {
             logger.error("An exception occurred while running testHomePage: " + e.getMessage());
@@ -136,6 +151,7 @@ public class Test {
             String screenShotFileName = currentDate.toString().replace(" ", "-").replace(":", "-");
             File screenShotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenShotFile, new File(screenShotFilePath + screenShotFileName + ".png"));
+            logger.info("System Taked ScreenShot...");
         }
     }
 }
