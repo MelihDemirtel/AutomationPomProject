@@ -36,7 +36,7 @@ public class Test {
     private CheckBoxPage checkBoxPage;
 
     private final String baseUrl = "https://demoqa.com";
-    private final String screenShotFilePath = "D:\\AutomationPomProject\\src\\test\\screenShots\\";
+    private final String screenShotFilePath = "C:\\Projeler\\AutomationPomProject\\src\\test\\screenShots\\";
 
     @BeforeClass
     public void setUp() {
@@ -45,7 +45,7 @@ public class Test {
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         currentDate = new Date();
-        file = new File("D:\\AutomationPomProject\\src\\test\\");
+        file = new File("C:\\Projeler\\AutomationPomProject\\src\\test\\");
         homePage = new HomePage(driver);
         elementsPage = new ElementsPage(driver);
         textBoxPage = new TextBoxPage(driver);
