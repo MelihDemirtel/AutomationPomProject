@@ -155,6 +155,22 @@ public class Test {
 
     }
 
+    @org.testng.annotations.Test(priority = 6)
+    public void testWebTablesPage() throws IOException {
+        try {
+            homePage.goToElementsPage();
+            elementsPage.goToWebTablesPage();
+            webTablesPage.verifyWebTablesPageIsOpened();
+            webTablesPage.checkDefaultData();
+            logger.info("********** TEST END **********");
+        } catch (AssertionError e) {
+            logger.error("An exception occurred while running testHomePage: " + e.getMessage());
+            takeScreenShot();
+            throw e;
+        }
+
+    }
+
     @AfterClass
     public void tearDown() {
         logger.info("Tests are ending...");
