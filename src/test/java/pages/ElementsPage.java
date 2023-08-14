@@ -28,6 +28,9 @@ public class ElementsPage {
     @FindBy(xpath = "//span[text()='Check Box']")
     private WebElement checkBoxPageBtn;
 
+    @FindBy(xpath = "//span[text()='Radio Button']")
+    private WebElement radioButtonPageBtn;
+
     public ElementsPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -52,5 +55,11 @@ public class ElementsPage {
         logger.info("Going to Check Box Page...");
         checkBoxPageBtn.click();
         return new CheckBoxPage(driver);
+    }
+
+    public RadioButtonPage goToRadioButtonPage() {
+        logger.info("Going to Radio Button Page...");
+        radioButtonPageBtn.click();
+        return new RadioButtonPage(driver);
     }
 }

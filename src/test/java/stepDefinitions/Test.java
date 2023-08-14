@@ -42,6 +42,7 @@ public class Test {
     public void setUp() {
         options = new ChromeOptions();
         options.addArguments("--enable-features=Cookies");
+        options.setExperimentalOption("w3c", true);
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         currentDate = new Date();
