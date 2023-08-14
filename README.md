@@ -67,3 +67,9 @@ Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENS
 - Tüm sayfalara logger eklendi. Test şablonundaki loglar page'lere taşındı ve görsel karışıklık düzeltildi.
 - pages paketinin altına "ChekBoxPage" eklendi.
 - testCheckBoxPage adımları eklendi.
+
+## Sürüm 1.5
+- pages paketinin altına "RadioButtonPage" eklendi.
+- testRadioButtonPage adımları eklendi.
+- Selenium sürümü güncellendi. (4.11.0)
+- TestNG sürümü güncellendi. (7.7.1)
