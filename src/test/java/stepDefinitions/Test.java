@@ -12,7 +12,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import pages.*;
+import pages.elements.CheckBoxPage;
+import pages.elements.ElementsPage;
+import pages.elements.RadioButtonPage;
+import pages.elements.TextBoxPage;
+import pages.home.HomePage;
 
 import java.io.File;
 import java.io.IOException;

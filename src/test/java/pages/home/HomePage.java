@@ -1,4 +1,4 @@
-package pages;
+package pages.home;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -11,6 +11,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import pages.alertsFrameWindows.AlertsFrameWindowsPage;
+import pages.elements.ElementsPage;
+import pages.forms.FormsPage;
+import pages.interactions.InteractionsPage;
+import pages.widgets.WidgetsPage;
 import stepDefinitions.Test;
 
 import java.time.Duration;
