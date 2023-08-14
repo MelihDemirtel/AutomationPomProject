@@ -31,6 +31,9 @@ public class ElementsPage {
     @FindBy(xpath = "//span[text()='Radio Button']")
     private WebElement radioButtonPageBtn;
 
+    @FindBy(xpath = "//span[text()='Web Tables']")
+    private WebElement webTablesPageBtn;
+
     public ElementsPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -62,4 +65,11 @@ public class ElementsPage {
         radioButtonPageBtn.click();
         return new RadioButtonPage(driver);
     }
+
+    public WebTablesPage goToWebTablesPage() {
+        logger.info("Going to Web Tables Page...");
+        webTablesPageBtn.click();
+        return new WebTablesPage(driver);
+    }
+
 }

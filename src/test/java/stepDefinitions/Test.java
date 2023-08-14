@@ -12,10 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import pages.elements.CheckBoxPage;
-import pages.elements.ElementsPage;
-import pages.elements.RadioButtonPage;
-import pages.elements.TextBoxPage;
+import pages.elements.*;
 import pages.home.HomePage;
 
 import java.io.File;
@@ -37,6 +34,8 @@ public class Test {
     private CheckBoxPage checkBoxPage;
     private RadioButtonPage radioButtonPage;
 
+    private WebTablesPage webTablesPage;
+
     private final String baseUrl = "https://demoqa.com";
     private final String screenShotFilePath = "C:\\Projeler\\AutomationPomProject\\src\\test\\screenShots\\";
 
@@ -54,6 +53,7 @@ public class Test {
         textBoxPage = new TextBoxPage(driver);
         checkBoxPage = new CheckBoxPage(driver);
         radioButtonPage = new RadioButtonPage(driver);
+        webTablesPage = new WebTablesPage(driver);
 
         logger.info("Driver is getting maximize...");
         driver.manage().window().maximize();
