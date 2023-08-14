@@ -12,10 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import pages.CheckBoxPage;
-import pages.ElementsPage;
-import pages.HomePage;
-import pages.TextBoxPage;
+import pages.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +31,7 @@ public class Test {
     private ElementsPage elementsPage;
     private TextBoxPage textBoxPage;
     private CheckBoxPage checkBoxPage;
+    private RadioButtonPage radioButtonPage;
 
     private final String baseUrl = "https://demoqa.com";
     private final String screenShotFilePath = "C:\\Projeler\\AutomationPomProject\\src\\test\\screenShots\\";
@@ -51,6 +49,7 @@ public class Test {
         elementsPage = new ElementsPage(driver);
         textBoxPage = new TextBoxPage(driver);
         checkBoxPage = new CheckBoxPage(driver);
+        radioButtonPage = new RadioButtonPage(driver);
 
         logger.info("Driver is getting maximize...");
         driver.manage().window().maximize();
@@ -126,6 +125,24 @@ public class Test {
             checkBoxPage.CollapseResult();
             logger.info("********** TEST END **********");
 
+        } catch (AssertionError e) {
+            logger.error("An exception occurred while running testHomePage: " + e.getMessage());
+            takeScreenShot();
+            throw e;
+        }
+
+    }
+
+    @org.testng.annotations.Test(priority = 5)
+    public void testRadioButtonPage() throws IOException {
+        try {
+            homePage.goToElementsPage();
+            elementsPage.goToRadioButtonPage();
+            radioButtonPage.verifyRadioButtonPageIsOpened();
+            radioButtonPage.clickYesRadioButton();
+            radioButtonPage.clickImpressiveRadioButton();
+            radioButtonPage.clickNoRadioButton();
+            logger.info("********** TEST END **********");
         } catch (AssertionError e) {
             logger.error("An exception occurred while running testHomePage: " + e.getMessage());
             takeScreenShot();
