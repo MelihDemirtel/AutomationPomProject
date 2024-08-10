@@ -1,8 +1,9 @@
 package stepDefinitions;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +37,7 @@ public class Test {
 
     private WebTablesPage webTablesPage;
 
-    private final String baseUrl = "https://demoqa.com";
+    private final String baseUrl = "https://demoqa.com/";
     private final String screenShotFilePath = "C:\\Projeler\\AutomationPomProject\\src\\test\\screenShots\\";
 
     @BeforeClass
@@ -60,7 +61,8 @@ public class Test {
     }
 
     @BeforeMethod
-    public void beforeAllTests() {
+    public void beforeAllTests() throws InterruptedException {
+        Thread.sleep(1000);
         logger.info("Opening  " + baseUrl + "  Website...");
         driver.get(baseUrl);
         homePage.verifyHomePageIsOpened();

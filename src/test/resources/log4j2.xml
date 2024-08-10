@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </Console>
+
+        <!-- Rolling File Appender -->
+        <RollingFile name="File" fileName="./log/app.log" filePattern="./log/app-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+            <AppenderRef ref="Console"/>
+        </RollingFile>
+
+        <!-- HTML File Appender -->
+        <File name="HTML" fileName="./log/test.html">
+            <HtmlLayout title="Application logs" locationInfo="true"/>
+            <AppenderRef ref="Console"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root Logger -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="HTML"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+<!--
+Console Appender:
+
+name="Console": Konsol için bir appender tanımlanır.
+target="SYSTEM_OUT": Log mesajları standart çıkışa (konsol) yönlendirilir.
+PatternLayout: Log mesajlarının biçimlendirilmesi için desen kullanılır.
+RollingFile Appender:
+
+name="File": Log dosyaları için bir appender tanımlanır.
+fileName="./log/app.log": Log dosyasının adını belirler.
+filePattern="./log/app-%d{yyyy-MM-dd}-%i.log": Log dosyası için dosya döndürme modelini tanımlar.
+SizeBasedTriggeringPolicy size="5MB": Dosyanın boyutuna göre döndürülmesini sağlar.
+DefaultRolloverStrategy max="10": Maksimum yedek dosya sayısını belirler.
+File Appender (HTML):
+
+name="HTML": HTML dosyaları için bir appender tanımlanır.
+fileName="./log/test.html": HTML log dosyasının adını belirler.
+HtmlLayout: HTML formatında log çıkışı sağlar.
+Root Logger:
+
+level="info": Root logger için minimum log seviyesini belirler.
+AppenderRef: Log mesajlarının yönlendirileceği appender'ları belirler.
+
+-->
