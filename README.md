@@ -78,3 +78,11 @@ Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENS
 - pages paketi altında yeni sayfa paketleri oluşturuldu ve ilgili sayfa sınıfları kendi paket isimlerine göre içine taşındı.
 - elements paketi altına WebTablesPage eklendi.
 - Test sınıfına testWebTablesPage adımları eklendi.
+
+## Sürüm 1.7
+- log4j sürümü güncellendi 2.x olarak yapılandırıldı
+- pom dosyasında log4j bağımlılıkları güncellendi
+- properties dosyası XML formatına güncellendi(log4j2.x XML desteklediği için)
+- Log4j 1.x: org.apache.log4j.Logger sınıfı ve
+- Log4j 2.x: org.apache.logging.log4j.LogManager ve 
+- org.apache.logging.log4j.Logger sınıfları olarak güncellendi.
